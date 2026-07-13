@@ -10,11 +10,12 @@ AE3 L2 media target for plain-text output. Simplest of the `l2.tgt.*` targets to
   - `TextContextHandler extends ContextHandler<TextTargetContext, BaseObject>` — context-handler interface.
   - `TextLayoutDefinition` (package-private, abstract) `implements LayoutDefinitionAbstract<TextTargetContext>, TextContextHandler` — base for the layout definitions below.
   - `TextLayoutSequence`, `TextLayoutString` (both package-private) `extends TextLayoutDefinition` — the only two registered layouts (no grid/image/link/etc. variants like the HTML/XHTML families have).
+  - `WebContextText extends TextTargetContext implements ru.myx.ae3.i3.web.WebContext<TextTargetContext>` — the HTTP-reply-producing adapter, moved here from `ae3.sys.pkg.i3.web` (see that unit's CLAUDE.md for why: every `WebContext*` class now lives with the target-context it wraps). Registered for `txt` via `ae3-packages/ae3.sys.l2.tgt.text/settings/system/l3/targets/text.json`.
   - `TestText.java` — manual smoke-test entry point, same shape as this family's other `Test*` classes.
 
 ## Build
 
-- Requires (Java, confirmed by source imports): `ae3.sdk` only — every cross-package import resolves to `ru.myx.ae3.i3.TargetInterface` (`ae3.api`) or `ru.myx.ae3.l2.*`/`ru.myx.ae3.Engine`/`ru.myx.ae3.report.Report`/`ru.myx.ae3.binary.*` (`ae3.sdk`).
+- Requires (Java): `ae3.sdk`, and now `ae3.web` too (added for `WebContextText` above — needs the `ru.myx.ae3.i3.web.WebContext` interface; `.classpath` needs a matching `path="/ae3.sys.pkg.i3.web"` `classpathentry`, added alongside). Every other cross-package import resolves to `ru.myx.ae3.i3.TargetInterface` (`ae3.api`) or `ru.myx.ae3.l2.*`/`ru.myx.ae3.Engine`/`ru.myx.ae3.report.Report`/`ru.myx.ae3.binary.*` (`ae3.sdk`).
 - No `package.json` at all under `ae3-packages/` (unlike the other `l2.tgt.*` units touched this session) — the bundle folder itself is still named `ae3.sys.l2.tgt.text`, which is the only naming signal available here (weaker corroboration than a `package.json` `"name"` field, but consistent with the pattern seen everywhere else: `ae3.sys.pkg.l2.tgt.<X>` directory -> `ae3.sys.l2.tgt.<X>` bundle/Provides name).
 
 ## Gotchas
