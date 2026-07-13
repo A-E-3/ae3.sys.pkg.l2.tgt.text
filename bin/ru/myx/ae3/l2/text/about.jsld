@@ -1,0 +1,7 @@
+{
+	layout : "intl",
+	value : {
+		en : "Русский. This is TEXT renderer.",
+		ru : "Это текстовый рендерер."
+	}
+}
