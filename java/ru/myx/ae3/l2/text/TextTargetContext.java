@@ -29,6 +29,11 @@ public abstract class TextTargetContext extends TargetContextAbstract<TextTarget
 		LAYOUTS = new TreeMap<>();
 		TextTargetContext.LAYOUTS.put("sequence", TextLayoutSequence.INSTANCE);
 		TextTargetContext.LAYOUTS.put("string", TextLayoutString.INSTANCE);
+		/** "grid" (html/pdf's 2-column field/value layout, e.g. ReduceDataViewGridFn.js) has no
+		 * natural table rendering in plain text, and TextLayoutSequence already does exactly
+		 * what text needs for it: walk "elements" in order, one per line - "width"/"border" are
+		 * html/pdf-specific and are safely ignored here, same as any other unused property. */
+		TextTargetContext.LAYOUTS.put("grid", TextLayoutSequence.INSTANCE);
 	}
 
 	/**

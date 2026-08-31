@@ -1,5 +1,5 @@
 {
-	"extensions" : ["txt"],
+	"extensions" : ["txt", "text"],
 	"contentTypes" : ["text/plain"],
 	"priority" : 0,
 	"context" : {

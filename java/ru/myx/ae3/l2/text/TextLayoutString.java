@@ -3,6 +3,20 @@ package ru.myx.ae3.l2.text;
 import ru.myx.ae3.base.Base;
 import ru.myx.ae3.base.BaseObject;
 
+/**
+ * Handles the "string" layout kind for the plain-text L2 target (the
+ * counterpart to {@link TextLayoutSequence}, which handles "sequence").
+ *
+ * The non-obvious part: leading runs of literal tabs/spaces in the string
+ * value are deliberately rewritten to visible Unicode space characters
+ * (U+2002 EN SPACE / U+2003 EM SPACE, doubled per tab) instead of being
+ * passed through as raw ASCII whitespace. Plain-text output from this
+ * renderer often ends up displayed somewhere that collapses or strips
+ * leading ASCII whitespace (browsers rendering text/plain, mail/IM clients,
+ * etc.); these Unicode space code points survive that collapsing, so
+ * indentation baked into a layout's "string" nodes stays visible instead of
+ * being silently eaten downstream.
+ */
 class TextLayoutString extends TextLayoutDefinition {
 
 	public static final TextLayoutString INSTANCE = new TextLayoutString();
